@@ -4,4 +4,5 @@ from .data_source import extract_member_at
 
 
 async def message_at_rule(event: GroupMessageEvent, message: Message = EventMessage()):
-    return await extract_member_at(event.group_id, message=message) or event.reply
+    has_at = await extract_member_at(event.group_id, message=message)
+    return bool(has_at) or bool(event.reply)
